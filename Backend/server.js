@@ -1,8 +1,18 @@
 const express = require('express'); //fetches the express package
 const cors = require('cors');
+require('dotenv').config();
+const connection=require('./config/db');
+
+
+const authRoutes=require('./routes/authRouter')
 const app= express(); //app holds express
 
+connection()
 app.use(cors());
+const DBPORT=process.env.PORT||3001;
+
+
+app.use('/api/auth',authRoutes)
 
 app.get('/',(req,res) =>{
     //send back hello from backend or your custom message
